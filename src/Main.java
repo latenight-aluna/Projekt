@@ -1,56 +1,54 @@
 import java.util.Scanner;
+
 public class Main {
-
     public static void main(String[] args) {
-
-
-        Scanner choose = new Scanner(System.in);
-        int opretFilm = 1;
-        int afslut = 2;
-
-        System.out.println("Velkommen til min filmsamling!");
-
-        while (opretFilm == 1) {
-            System.out.print("1. Opret film:");
-            opretFilm = choose.nextInt();
-
-            if (opretFilm == afslut) {
-                System.out.println("Afslut");
-            }
-        }
-
-
-
-
-
-
+        final int SENTINEL = 2;
+        int loopInput = 0;
 
         Scanner scanner = new Scanner(System.in);
 
         MovieCollection myCollection = new MovieCollection();
 
-        System.out.println("To add a movie to your movie collection, follow the instructions below.");
+        System.out.println("Velkommen til din filmsamling");
 
-        System.out.println("Movie title:");
-        String title = scanner.nextLine();
+        while (loopInput != SENTINEL) {
+            System.out.println("1. Opret film");
+            System.out.println("2. Afslut");
+            loopInput = scanner.nextInt();
 
-        System.out.println("Director name:");
-        String director = scanner.nextLine();
+            if (loopInput == 1) {
+                System.out.println("Indtast filmoplysninger:");
 
-        System.out.println("Release year:");
-        int yearCreated = scanner.nextInt();
+                System.out.println("Titel:");
+                String title = scanner.nextLine(); // brug nextLine() for at forhindre en fejl ved indlæsning af næste linje
 
-        System.out.println("Is the movie in color? (type true for yes or false for no):");
-        boolean isInColor = scanner.nextBoolean();
+                System.out.println("Instruktør:");
+                String director = scanner.nextLine();
 
-        System.out.println("Movie length in minutes:");
-        int lengthInMinutes = scanner.nextInt();
+                System.out.println("Udgivelsesår:");
+                int yearCreated = scanner.nextInt();
 
-        System.out.println("Movie genre:");
-        String genre = scanner.next();
+                System.out.println("Er filmen i farver? (skriv true for ja eller false for nej):");
+                boolean isInColor = scanner.nextBoolean();
 
-        myCollection.addMovie(title, director, yearCreated, isInColor, lengthInMinutes, genre);
+                System.out.println("Længde i minutter:");
+                int lengthInMinutes = scanner.nextInt();
 
-        System.out.println("Movie successfully added to your movie collection.");
+                System.out.println("Genre:");
+                String genre = scanner.next();
+
+                // Tilføj film til samling
+                myCollection.addMovie(title, director, yearCreated, isInColor, lengthInMinutes, genre);
+
+                System.out.println("Film tilføjet til din filmsamling.");
+            } else if (loopInput == 2) {
+                System.out.println("Afslutter...");
+                break;
+            } else {
+                System.out.println("Ugyldigt valg. Prøv igen.");
+            }
+        }
+
+        scanner.close();
     }
 }
