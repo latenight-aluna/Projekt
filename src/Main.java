@@ -3,6 +3,28 @@ public class Main {
 
     public static void main(String[] args) {
 
+
+        Scanner choose = new Scanner(System.in);
+        int opretFilm = 1;
+        int afslut = 2;
+
+        System.out.println("Velkommen til min filmsamling!");
+
+        while (opretFilm == 1) {
+            System.out.print("1. Opret film:");
+            opretFilm = choose.nextInt();
+
+            if (opretFilm == afslut) {
+                System.out.println("Afslut");
+            }
+        }
+
+
+
+
+
+
+
         Scanner scanner = new Scanner(System.in);
 
         MovieCollection myCollection = new MovieCollection();
