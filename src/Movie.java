@@ -1,15 +1,15 @@
 public class Movie {
 
-    //Attributter
+    // Attributes
     private String title;
     private String director;
     private int yearCreated;
     private boolean isInColor;
-    private int lengthInMinutes;
+    private double lengthInMinutes;
     private String genre;
 
-    public Movie(String title, String director, int yearCreated, boolean isInColor,
-                           int lengthInMinutes, String genre) {
+    // Constructor
+    public Movie(String title, String director, int yearCreated, boolean isInColor, double lengthInMinutes, String genre) {
         this.title = title;
         this.director = director;
         this.yearCreated = yearCreated;
@@ -18,22 +18,29 @@ public class Movie {
         this.genre = genre;
     }
 
-    public String getTitle() {
-        return title;
-    }
-    public String getDirector() {
-        return director;
-    }
-    public int getYearCreated() {
-        return yearCreated;
-    }
-    public boolean getisInColor() {
-        return isInColor;
-    }
-    public int getLengthInMinutes() {
-        return lengthInMinutes;
-    }
-    public String getGenre() {
-        return genre;
+    // Getters
+    public String getTitle() {return title;}
+    public String getDirector() {return director;}
+    public int getYearCreated() {return yearCreated;}
+    public boolean getIsInColor() {return isInColor;}
+    public double getLengthInMinutes() {return lengthInMinutes;}
+    public String getGenre() {return genre;}
+
+    // Object method
+    @Override
+    public String toString() {
+        String isInColorAsString;
+        if(isInColor) {
+            isInColorAsString = "yes";
+        }
+        else {
+            isInColorAsString = "no";
+        }
+        return "Title: " + title +
+                "\nDirector: " + director +
+                "\nYear created: " + yearCreated +
+                "\nIs in color: " + isInColorAsString +
+                "\nLength in minutes: " + lengthInMinutes +
+                "\nGenre: " + genre;
     }
 }

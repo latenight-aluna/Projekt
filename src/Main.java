@@ -2,53 +2,59 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        final int SENTINEL = 2;
-        int loopInput = 0;
 
-        Scanner scanner = new Scanner(System.in);
+        Controller controller = new Controller();
+        Scanner input = new Scanner(System.in);
+        input.useDelimiter("\n"); // Forhindrer bøvl med mellemrum
 
-        MovieCollection myCollection = new MovieCollection();
+        boolean run = true;
+        while (run) {
 
-        System.out.println("Velkommen til din filmsamling");
+            // Præsenterer menuen
+            System.out.println(
+                    "\nVelkommen til min filmsamling!\n" +
+                            "1. Opret en film\n" +
+                            "2. Søg efter film\n" +
+                            "3. Udskriv filmsamling\n" +
+                            "4. Afslut\n" +
+                            "\nIndtast menuvalg:"
+            );
+            switch (input.nextInt()) { // Henter menuvalg
 
-        while (loopInput != SENTINEL) {
-            System.out.println("1. Opret film");
-            System.out.println("2. Afslut");
-            loopInput = scanner.nextInt();
+                case 1: // Opretter og tilføjer film
+                    System.out.println("\nIndtast venligst informationer om filmen.\nTitle:");
+                    String title = input.next();
+                    System.out.println("Director:");
+                    String director = input.next();
+                    System.out.println("Year created:");
+                    int yearCreated = input.nextInt();
+                    System.out.println("Is in color (yes/no):");
+                    boolean isInColor = input.next().equalsIgnoreCase("yes");
+                    System.out.println("Length in minutes:");
+                    double lengthInMinutes = input.nextDouble();
+                    System.out.println("Genre:");
+                    String genre = input.next();
+                    controller.addMovie(title, director, yearCreated, isInColor, lengthInMinutes, genre);
+                    System.out.println("\nFilm tilføjet.");
+                    break;
 
-            if (loopInput == 1) {
-                System.out.println("Indtast filmoplysninger:");
+                case 2: // Søger efter en film ud fra titlen
+                    System.out.println("\nIndtast søgeord til filmtitlerne:");
+                    System.out.println("\n" + controller.searchMovieAsString(input.next()));
+                    break;
 
-                System.out.println("Titel:");
-                String title = scanner.nextLine(); // brug nextLine() for at forhindre en fejl ved indlæsning af næste linje
+                case 3: // Udskriver filmsamlingen som tekst i terminalen
+                    System.out.println("\n" + controller.getMovieCollectionAsString());
+                    break;
 
-                System.out.println("Instruktør:");
-                String director = scanner.nextLine();
+                case 4: // Afslutter programmet
+                    System.out.println("\nAfslutter...");
+                    run = false;
+                    break;
 
-                System.out.println("Udgivelsesår:");
-                int yearCreated = scanner.nextInt();
-
-                System.out.println("Er filmen i farver? (skriv true for ja eller false for nej):");
-                boolean isInColor = scanner.nextBoolean();
-
-                System.out.println("Længde i minutter:");
-                int lengthInMinutes = scanner.nextInt();
-
-                System.out.println("Genre:");
-                String genre = scanner.next();
-
-                // Tilføj film til samling
-                myCollection.addMovie(title, director, yearCreated, isInColor, lengthInMinutes, genre);
-
-                System.out.println("Film tilføjet til din filmsamling.");
-            } else if (loopInput == 2) {
-                System.out.println("Afslutter...");
-                break;
-            } else {
-                System.out.println("Ugyldigt valg. Prøv igen.");
+                default: // Hvis brugeren skriver ugyldigt menuvalg
+                    System.out.println("Menuvalg skal være \"1\", \"2\", \"3\" eller \"4\".");
             }
         }
-
-        scanner.close();
     }
 }
