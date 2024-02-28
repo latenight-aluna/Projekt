@@ -34,7 +34,7 @@ public class MovieCollection {
     public String toString() {
         StringBuilder returnString = new StringBuilder();
         for(Movie movie : movieList) {
-            returnString.append("\n").append(movie).append("\n");
+            returnString.append("\n").append(movie.toString()).append("\n");
         }
         return returnString.toString();
     }
